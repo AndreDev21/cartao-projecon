@@ -8,6 +8,7 @@ de NFC ou leitura de QR — WhatsApp, site, redes e **Adicionar aos contatos** (
 index.html                      o cartão
 nelson-martins-projecon.vcf     contato pra agenda (com foto do logo embutida)
 gerar-qr.py                     gera os QR codes a partir da URL final
+gerar-vcf.py                    regenera o .vcf (não edite o .vcf na mão)
 img/logo-projecon.png           logo (versão pra fundo escuro, tirada do site)
 img/banner.jpg                  foto de obra usada no topo do cartão
 img/vcard-photo.png             marca quadrada usada como foto do contato
@@ -94,11 +95,11 @@ Tudo em texto puro, sem build:
 | Redes sociais | `index.html` (bloco `.socials`) e `X-SOCIALPROFILE` no `.vcf` |
 
 O `.vcf` é vCard 3.0 com a foto do logo embutida em base64 — entra na agenda do iPhone
-e do Android já com imagem. Se editar o arquivo na mão, **não mexa nas linhas que começam
-com espaço**: é o dobramento da foto em base64.
+e do Android já com imagem. Para mudar qualquer campo dele, edita o `gerar-vcf.py` e roda
+`python3 gerar-vcf.py`. Editar o `.vcf` direto é pedir problema: a foto ocupa ~190 linhas
+dobradas em base64 e uma quebra errada corrompe o arquivo inteiro.
 
 ## Dados que ainda faltam
 
-- [ ] E-mail comercial
 - [ ] Telefone fixo (se tiver)
 - [ ] CNPJ e endereço completo (se quiser no vCard)

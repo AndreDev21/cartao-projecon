@@ -9,6 +9,10 @@ index.html                      o cartão
 nelson-martins-projecon.vcf     contato pra agenda (com foto do logo embutida)
 gerar-qr.py                     gera os QR codes a partir da URL final
 gerar-vcf.py                    regenera o .vcf (não edite o .vcf na mão)
+gerar-cartao-pdf.py             gera os cartões impressos (85,5 × 54 mm)
+cartao-qr-github.pdf            cartão impresso — QR aponta pro GitHub Pages
+cartao-qr-site.pdf              cartão impresso — QR aponta pro /cartaodecontato
+fonts/                          Poppins (OFL), usada nos PDFs
 img/logo-projecon.png           logo (versão pra fundo escuro, tirada do site)
 img/banner.jpg                  foto de obra usada no topo do cartão
 img/vcard-photo.png             marca quadrada usada como foto do contato
@@ -67,6 +71,33 @@ python3 gerar-qr.py https://www.projecon.pro.br/cartao/
 
 Sai `qr-print.png` (impressão/adesivo, preto no branco — lê melhor),
 `qr.svg` (vetor pra gráfica) e `qr.png` (tela, nas cores da marca).
+
+## Cartão impresso (PDF)
+
+Dois PDFs no tamanho exato do cartão de crédito — **85,5 × 54 mm, CR80** — duas páginas
+cada: frente (logo, nome, telefone, e-mail, site e o QR) e verso (marca, serviços e a URL).
+Tipografia em Poppins, a mesma do site.
+
+| Arquivo | QR aponta pra |
+|---|---|
+| `cartao-qr-github.pdf` | `https://andredev21.github.io/cartao-projecon/` |
+| `cartao-qr-site.pdf` | `https://www.projecon.pro.br/cartaodecontato/` |
+
+O segundo só funciona depois que a pasta estiver no FTP, em `/cartaodecontato/`.
+
+Regerar depois de mudar telefone, e-mail ou URL:
+
+```bash
+pip install reportlab segno
+python3 gerar-cartao-pdf.py
+```
+
+**Antes de mandar pra gráfica:** põe `BLEED = 3 * mm` no topo do `gerar-cartao-pdf.py`
+e roda de novo — a maioria das gráficas pede 3mm de sangria e recusa arquivo no tamanho
+final exato. Com `BLEED = 0` (padrão) serve pra impressão caseira e pra adesivo.
+
+Imprimir sempre em **tamanho real / 100%**, nunca "ajustar à página": escalar o QR
+pra menos estraga a leitura.
 
 ## Gravar o cartão/adesivo NFC
 

@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Nelson Martins — Projecon | Cartão de Contato</title>
 <meta name="description" content="Nelson Martins — Projecon Projetos &amp; Construções. Obras, reformas, galpões e obras públicas. Serra Negra/SP, atendimento em todo o Brasil.">
 <meta name="theme-color" content="#84C225">
@@ -30,12 +30,15 @@
     --body: #cfd4c6;
     --muted: #9aa38d;
     --radius: 10px;
+    /* respiro vertical — encolhe junto com a tela */
+    --gap: clamp(8px, 1.6vh, 15px);
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  html, body { height: 100%; overflow: hidden; }
   body {
     margin: 0;
-    min-height: 100dvh;
+    height: 100dvh;
     background:
       radial-gradient(1200px 500px at 50% -10%, rgba(132, 194, 37, .10), transparent 70%),
       var(--bg);
@@ -44,25 +47,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 16px;
+    padding: clamp(6px, 1.5vh, 16px);
+    padding-bottom: max(clamp(6px, 1.5vh, 16px), env(safe-area-inset-bottom));
   }
   :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
 
   .card {
     width: 100%;
-    max-width: 430px;
+    max-width: 420px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-top: 3px solid var(--green);
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: 0 24px 60px rgba(0, 0, 0, .55);
+    transform-origin: center center;
   }
 
   /* ---------- topo ---------- */
   .hero {
     position: relative;
-    padding: 26px 20px 18px;
+    padding: calc(var(--gap) * 1.3) 20px var(--gap);
     text-align: center;
     background-image:
       linear-gradient(to bottom, rgba(12, 14, 10, .62) 0%, rgba(12, 14, 10, .88) 55%, var(--surface) 100%),
@@ -71,17 +76,16 @@
     background-position: center 35%;
   }
   .hero img {
-    width: 150px;
-    max-width: 62%;
+    width: clamp(96px, 13vh, 136px);
     height: auto;
     display: block;
-    margin: 0 auto 16px;
+    margin: 0 auto calc(var(--gap) * .7);
     filter: drop-shadow(0 4px 14px rgba(0, 0, 0, .6));
   }
   .hero h1 {
-    margin: 0 0 4px;
+    margin: 0 0 3px;
     font-family: 'Poppins', sans-serif;
-    font-size: 27px;
+    font-size: clamp(22px, 3.1vh, 27px);
     font-weight: 600;
     letter-spacing: -.02em;
     color: var(--text);
@@ -90,7 +94,7 @@
   .role {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    font-size: 12px;
+    font-size: clamp(10px, 1.35vh, 12px);
     font-weight: 500;
     letter-spacing: .14em;
     text-transform: uppercase;
@@ -98,44 +102,46 @@
   }
 
   /* ---------- corpo ---------- */
-  .body { padding: 18px 20px 22px; }
+  .body { padding: var(--gap) 20px calc(var(--gap) * 1.2); }
   .bio {
-    margin: 0 0 16px;
-    font-size: 14px;
+    margin: 0 0 var(--gap);
+    font-size: clamp(12.5px, 1.6vh, 14px);
     font-weight: 300;
-    line-height: 1.6;
+    line-height: 1.5;
     color: var(--body);
+    text-align: center;
   }
   .chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 20px;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: var(--gap);
   }
   .chip {
-    font-size: 11.5px;
+    font-size: clamp(10px, 1.3vh, 11.5px);
     color: var(--green);
     background: var(--green-soft);
     border: 1px solid var(--border-strong);
     border-radius: 999px;
-    padding: 5px 11px;
+    padding: 4px 10px;
     white-space: nowrap;
   }
 
   /* ---------- botões ---------- */
-  .ctas { display: flex; flex-direction: column; gap: 9px; }
+  .ctas { display: flex; flex-direction: column; gap: 7px; }
   .cta {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     width: 100%;
-    min-height: 50px;
-    padding: 13px 18px;
+    min-height: clamp(42px, 5.6vh, 50px);
+    padding: 10px 18px;
     border-radius: var(--radius);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 15px;
+    font-size: clamp(13.5px, 1.8vh, 15px);
     text-decoration: none;
     transition: transform .12s ease, background .12s ease, border-color .12s ease;
   }
@@ -154,8 +160,8 @@
     color: var(--body);
     border: 1px dashed var(--border-strong);
     font-weight: 500;
-    font-size: 14px;
-    min-height: 46px;
+    font-size: clamp(12.5px, 1.65vh, 14px);
+    min-height: clamp(38px, 5vh, 46px);
   }
   .cta-site:hover { color: var(--green); border-color: var(--green); }
 
@@ -163,20 +169,20 @@
   .divider {
     height: 1px;
     background: var(--border);
-    margin: 20px 0 16px;
+    margin: var(--gap) 0 calc(var(--gap) * .85);
   }
   .socials {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 16px;
+    gap: 9px;
+    margin-bottom: calc(var(--gap) * .85);
   }
   .socials a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: clamp(36px, 4.8vh, 42px);
+    height: clamp(36px, 4.8vh, 42px);
     border-radius: 50%;
     border: 1px solid var(--border-strong);
     color: var(--muted);
@@ -190,7 +196,7 @@
   .meta {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     align-items: center;
     text-align: center;
   }
@@ -198,29 +204,63 @@
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    font-size: 13px;
+    font-size: clamp(11.5px, 1.5vh, 13px);
     color: var(--muted);
     text-decoration: none;
   }
   .meta a:hover { color: var(--green); }
   .tagline {
-    margin: 16px 0 0;
+    margin: calc(var(--gap) * .85) 0 0;
     text-align: center;
     font-family: 'Poppins', sans-serif;
-    font-size: 11px;
+    font-size: clamp(9px, 1.2vh, 11px);
     letter-spacing: .05em;
     color: #6f7862;
   }
 
-  @media (max-width: 360px) {
-    body { padding: 10px; }
-    .hero h1 { font-size: 24px; }
-    .cta { font-size: 14px; }
+  /* ---------- celular deitado: duas colunas em vez de encolher tudo ---------- */
+  @media (orientation: landscape) and (max-height: 560px) {
+    :root { --gap: clamp(6px, 2.2vh, 12px); }
+    .card {
+      max-width: 700px;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+    }
+    .hero {
+      flex: 0 0 38%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--gap) 14px;
+      background-image:
+        linear-gradient(to right, rgba(12, 14, 10, .55) 0%, rgba(12, 14, 10, .88) 65%, var(--surface) 100%),
+        url('img/banner.jpg');
+      background-position: center;
+    }
+    .hero img { width: clamp(78px, 26vh, 120px); }
+    .hero h1 { font-size: clamp(18px, 5.5vh, 24px); }
+    .role { font-size: clamp(9px, 2.3vh, 11px); }
+    .body {
+      flex: 1;
+      min-width: 0;
+      padding: var(--gap) 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .bio, .chips { text-align: center; }
+    .bio { font-size: clamp(11px, 2.6vh, 13px); }
+    .chip { font-size: clamp(9px, 2.1vh, 11px); padding: 3px 8px; }
+    .cta { min-height: clamp(34px, 9vh, 44px); font-size: clamp(12px, 3vh, 15px); }
+    .cta-site { min-height: clamp(30px, 8vh, 40px); font-size: clamp(11px, 2.7vh, 13px); }
+    .socials a { width: clamp(30px, 8vh, 38px); height: clamp(30px, 8vh, 38px); }
+    .meta a, .meta span { font-size: clamp(10px, 2.4vh, 12px); }
   }
 </style>
 </head>
 <body>
-<main class="card">
+<main class="card" id="card">
 
   <header class="hero">
     <img src="img/logo-projecon.png" alt="Projecon — Projetos &amp; Construções">
@@ -230,17 +270,16 @@
 
   <div class="body">
     <p class="bio">
-      Construção civil desde 2016. Obras residenciais, industriais, comerciais e públicas —
-      do projeto à entrega, com acompanhamento em todas as etapas e acabamento de alto padrão.
-      Base em Serra Negra/SP, atendendo o Circuito das Águas, a região de Campinas e obras em todo o Brasil.
+      Construção civil desde 2016. Do projeto à entrega, com acompanhamento em todas
+      as etapas — obras residenciais, industriais, comerciais e públicas.
     </p>
 
     <div class="chips">
       <span class="chip">Obras públicas</span>
-      <span class="chip">Reformas e ampliações</span>
+      <span class="chip">Reformas</span>
       <span class="chip">Galpões pré-moldados</span>
       <span class="chip">Pisos industriais</span>
-      <span class="chip">Praças e paisagismo</span>
+      <span class="chip">Paisagismo</span>
       <span class="chip">Administração de obras</span>
     </div>
 
@@ -294,5 +333,32 @@
   </div>
 
 </main>
+
+<script>
+  /* Rede de segurança: o CSS acima encolhe o cartão com a tela, mas em aparelho
+     muito baixo (ou com fonte do sistema aumentada) ainda pode sobrar altura.
+     Aqui o cartão inteiro é reduzido proporcionalmente até caber — nunca ampliado. */
+  (function () {
+    var card = document.getElementById('card');
+    if (!card) return;
+
+    function fit() {
+      card.style.transform = 'scale(1)';
+      var disponivel = document.documentElement.clientHeight
+        - parseFloat(getComputedStyle(document.body).paddingTop)
+        - parseFloat(getComputedStyle(document.body).paddingBottom);
+      var altura = card.offsetHeight;
+      if (altura > disponivel) {
+        card.style.transform = 'scale(' + (disponivel / altura) + ')';
+      }
+    }
+
+    fit();
+    window.addEventListener('resize', fit);
+    window.addEventListener('orientationchange', fit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    if (window.ResizeObserver) new ResizeObserver(fit).observe(card);
+  })();
+</script>
 </body>
 </html>

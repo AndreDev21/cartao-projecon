@@ -94,6 +94,14 @@ Tudo em texto puro, sem build:
 | URL do preview | `og:url` e `og:image` no `<head>` do `index.html` |
 | Redes sociais | `index.html` (bloco `.socials`) e `X-SOCIALPROFILE` no `.vcf` |
 
+O cartão é feito pra caber **inteiro numa tela, sem scroll** — quem lê o QR ou encosta
+no NFC vê tudo de cara. Os tamanhos e espaçamentos usam `clamp()` com `vh`, então
+encolhem junto com a tela; celular deitado vira layout de duas colunas; e um script
+de ~15 linhas no fim do arquivo reduz o cartão inteiro se ainda assim faltar altura.
+
+Por isso, se você acrescentar chips ou engordar a bio, nada quebra — mas o cartão
+começa a encolher em aparelho baixo. Tira algo em troca antes de adicionar.
+
 O `.vcf` é vCard 3.0 com a foto do logo embutida em base64 — entra na agenda do iPhone
 e do Android já com imagem. Para mudar qualquer campo dele, edita o `gerar-vcf.py` e roda
 `python3 gerar-vcf.py`. Editar o `.vcf` direto é pedir problema: a foto ocupa ~190 linhas
